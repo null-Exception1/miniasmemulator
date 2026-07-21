@@ -18,6 +18,8 @@ add_library(microops
 add_library(compiler 
   libs/compiler/src/add_var.c
   libs/compiler/src/get_var.c
+  libs/compiler/src/get_register.c
+  libs/compiler/src/addressing.c
 )
 target_include_directories(microops PUBLIC libs/microops/include)
 target_include_directories(microops PUBLIC libs/globals/include)

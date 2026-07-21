@@ -4,4 +4,6 @@
 void add_var(char *name, Memory *memory, int size, unsigned char *value,
              int *var_ptr, Variable *vartoaddr, Type type);
 Variable *get_var(char *name, Variable *vartoaddr, Memory *memory, int var_ptr);
+Register *get_register(const char *reg_name);
+void parser(char *string, int *offset, bool *deref, char *var_name);
 #endif

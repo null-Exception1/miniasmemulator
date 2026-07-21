@@ -32,6 +32,7 @@ typedef struct {
   unsigned char *address;
   int size;
   Type var_type;
+  bool is_immediate;
 } Variable;
 
 typedef struct {
