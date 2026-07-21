@@ -5,8 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void mov(char *dest_addr, char *src_addr) {
-
+void sub(char *dest_addr, char *src_addr) {
   bool destreg = false;
   Register *dest_reg;
   if (get_register(dest_addr) != NULL) {
@@ -21,8 +20,17 @@ void mov(char *dest_addr, char *src_addr) {
     srcreg = true;
   }
 
-  if (srcreg && destreg) {
-    memcpy(dest_reg->value, src_reg->value, 4);
+  /*
+  add takes has following cases
+
+  add reg1, reg2
+  add [var], reg2
+  add reg1, [var]
+
+  */
+  if (destreg && srcreg) {
+    int res = *(int *)dest_reg->value - *(int *)src_reg->value;
+    memcpy(dest_reg->value, &res, 4); // direction addition
   } else if (destreg && !srcreg) {
 
     int offset1;
@@ -46,7 +54,8 @@ void mov(char *dest_addr, char *src_addr) {
 
     if (ptr->is_immediate == true) {
 
-      memcpy(dest_reg->value, ptr->address, ptr->size);
+      int res = *(int *)dest_reg->value - *(int *)ptr->address;
+      memcpy(dest_reg->value, &res, ptr->size);
 
     } else {
 
@@ -68,7 +77,10 @@ void mov(char *dest_addr, char *src_addr) {
       }
 
       printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
-      memcpy(offset_addr2, offset_addr1, ptr->size);
+
+      int res = *(int *)offset_addr1 - *(int *)offset_addr2;
+
+      memcpy(offset_addr2, &res, ptr->size);
     }
   } else if (!destreg && srcreg) {
     int offset1;
@@ -104,11 +116,14 @@ void mov(char *dest_addr, char *src_addr) {
     }
 
     printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
-    memcpy(offset_addr2, offset_addr1, ptr->size);
+
+    int res = *(int *)offset_addr1 - *(int *)offset_addr2;
+
+    memcpy(offset_addr2, &res, ptr->size);
   } else {
     fprintf(stderr,
             "Asm Error: Invalid memory-to-memory operation or bad syntax! "
-            "(e.g., mov [var1], [var2] is not supported by x86 hardware)\n");
+            "(e.g., add [var1], [var2] is not supported by x86 hardware)\n");
     exit(1);
   }
 }
