@@ -19,8 +19,10 @@ add_library(compiler
   libs/compiler/src/add_var.c
   libs/compiler/src/get_var.c
 )
-#target_include_directories(microops PUBLIC libs/microops/include)
-#target_include_directories(microops PRIVATE libs/globals/include)
+target_include_directories(microops PUBLIC libs/microops/include)
+target_include_directories(microops PUBLIC libs/globals/include)
+target_include_directories(microops PUBLIC libs/compiler/include)
+
 target_include_directories(main PUBLIC libs/globals/include)
 target_include_directories(main PUBLIC libs/globals/include)
 target_include_directories(main PUBLIC libs/compiler/include)
@@ -34,4 +36,4 @@ target_include_directories(compiler PUBLIC libs/memory/include)
 
 target_link_libraries(memory PUBLIC m)
 
-target_link_libraries(main PUBLIC memory compiler)
+target_link_libraries(main PUBLIC memory compiler microops)

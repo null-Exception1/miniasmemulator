@@ -3,8 +3,7 @@
 #include <memory.h>
 #include <stdio.h>
 #include <string.h>
-static Memory memory;
-static int var_ptr = 0;
+
 void show(unsigned char *addr, int len) {
   for (int i = 0; i < len; i++) {
     unsigned char byte;
@@ -15,8 +14,7 @@ void show(unsigned char *addr, int len) {
 }
 int main() {
   unsigned char *global_start_addr;
-  Variable *vartoaddr;
-
+  var_ptr = 0;
   init_memory(&global_start_addr, &vartoaddr);
   memory.data = global_start_addr;
   memory.data_ptr = global_start_addr;
@@ -32,8 +30,7 @@ int main() {
 
   show(memory.data, 100);
 
-  // char name[10] = "myvar";
-  // int value = 10;
+  // adding 2 inconspicous variables
   int value[4] = {1, 2, 3, 4};
   add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
           INT);

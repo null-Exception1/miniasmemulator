@@ -43,4 +43,21 @@ typedef struct {
   long long var_value_long_long;
   bool found;
 } ReturnVal;
+
+typedef struct {
+  unsigned char value[4];
+} Register;
+
+extern Register eax;
+extern Register ebx;
+extern Register ecx;
+extern Register edx;
+extern Register ebp;
+extern Register eip;
+extern Register esp;
+
+extern Memory memory;
+extern int var_ptr;
+extern Variable *vartoaddr;
+
 #endif
