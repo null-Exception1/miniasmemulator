@@ -14,7 +14,6 @@ void show(unsigned char *addr, int len) {
   printf("\n \n");
 }
 int main() {
-
   unsigned char *global_start_addr;
   Variable *vartoaddr;
 
@@ -35,11 +34,13 @@ int main() {
 
   // char name[10] = "myvar";
   // int value = 10;
-  int value = 10;
-  add_var("myvar", &memory, 4, (unsigned char *)&value, &var_ptr, vartoaddr);
+  int value[4] = {1, 2, 3, 4};
+  add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
+          INT);
 
   char value2[10] = "Teri mkc";
-  add_var("myvar2", &memory, 4, (unsigned char *)&value2, &var_ptr, vartoaddr);
+  add_var("myvar2", &memory, strlen(value2) + 1, (unsigned char *)&value2,
+          &var_ptr, vartoaddr, CHAR);
 
   show(memory.data, 100);
 
@@ -48,5 +49,16 @@ int main() {
          vartoaddr[0].size);
   printf("%p %s %d \n", vartoaddr[1].address, vartoaddr[1].name,
          vartoaddr[1].size);
+
+  Variable *ptr = get_var("myvar", vartoaddr, &memory, var_ptr);
+
+  printf("get var %p %s %d\n", ptr->address, ptr->name, ptr->size);
+
+  int getval[4];
+
+  memcpy(getval, (int *)ptr->address, ptr->size);
+
+  printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
+
   return 0;
 }

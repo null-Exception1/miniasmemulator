@@ -5,6 +5,8 @@
 #define CODE_LEN 1024
 #define STACK_LEN 1024
 #define VARIABLE_LIMIT 100
+
+#include <stdbool.h>
 typedef struct {
   unsigned char *data;
   unsigned char *data_ptr;
@@ -17,10 +19,28 @@ typedef struct {
   unsigned char *stack_end;
 } Memory;
 
+typedef enum {
+  CHAR,
+  INT,
+  DOUBLE,
+  LONG,
+  LONG_LONG,
+} Type;
+
 typedef struct {
   char name[10];
-  int *address;
+  unsigned char *address;
   int size;
+  Type var_type;
 } Variable;
 
+typedef struct {
+  Type var_type;
+  int var_value_int;
+  char var_value_char;
+  double var_value_double;
+  long var_value_long;
+  long long var_value_long_long;
+  bool found;
+} ReturnVal;
 #endif
