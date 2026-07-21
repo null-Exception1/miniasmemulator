@@ -1,6 +1,7 @@
 #include <compiler.h>
 #include <globals.h>
 #include <memory.h>
+#include <microops.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -12,6 +13,19 @@ void show(unsigned char *addr, int len) {
   }
   printf("\n \n");
 }
+
+Register eax;
+Register ebx;
+Register ecx;
+Register edx;
+Register ebp;
+Register eip;
+Register esp;
+
+Memory memory;
+int var_ptr = 0; // Initialized to 0
+Variable *vartoaddr = NULL;
+
 int main() {
   unsigned char *global_start_addr;
   var_ptr = 0;
@@ -31,7 +45,7 @@ int main() {
   show(memory.data, 100);
 
   // adding 2 inconspicous variables
-  int value[4] = {1, 2, 3, 4};
+  int value[4] = {231401, 2, 3, 4};
   add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
           INT);
 
@@ -42,11 +56,13 @@ int main() {
   show(memory.data, 100);
 
   show((unsigned char *)vartoaddr, 100);
+
   printf("%p %s %d \n", vartoaddr[0].address, vartoaddr[0].name,
          vartoaddr[0].size);
   printf("%p %s %d \n", vartoaddr[1].address, vartoaddr[1].name,
          vartoaddr[1].size);
 
+  // getting a variable from memory
   Variable *ptr = get_var("myvar", vartoaddr, &memory, var_ptr);
 
   printf("get var %p %s %d\n", ptr->address, ptr->name, ptr->size);
@@ -56,6 +72,13 @@ int main() {
   memcpy(getval, (int *)ptr->address, ptr->size);
 
   printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
+
+  // putting myvar in eax
+  mov("eax", "myvar", 4);
+
+  printf("eax value : ");
+
+  show(eax.value, 4);
 
   return 0;
 }
