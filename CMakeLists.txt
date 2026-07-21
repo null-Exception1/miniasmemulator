@@ -37,5 +37,5 @@ target_include_directories(compiler PUBLIC libs/compiler/include)
 target_include_directories(compiler PUBLIC libs/memory/include)
 
 target_link_libraries(memory PUBLIC m)
-
+target_link_libraries(microops PUBLIC compiler)
 target_link_libraries(main PUBLIC memory compiler microops)
