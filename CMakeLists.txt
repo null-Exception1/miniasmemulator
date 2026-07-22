@@ -13,13 +13,15 @@ add_library(memory
   libs/memory/src/init.c
 )
 add_library(microops
-  libs/microops/src/mov.c
   libs/microops/src/alu/sub.c
   libs/microops/src/alu/add.c
   libs/microops/src/alu/mul.c
   libs/microops/src/alu/div.c
   libs/microops/src/logic/xor.c
   libs/microops/src/logic/and.c
+  libs/microops/src/logic/or.c
+  libs/microops/src/logic/not.c
+  libs/microops/src/mov.c
 )
 add_library(compiler 
   libs/compiler/src/add_var.c

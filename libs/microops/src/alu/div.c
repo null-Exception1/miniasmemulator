@@ -47,7 +47,7 @@ void div_(char *dest_addr, char *src_addr) {
 
     if (ptr->is_immediate == true) {
 
-      float res = *(float *)dest_reg->value + *(float *)ptr->address;
+      float res = *(float *)dest_reg->value + immediate_val;
       memcpy(dest_reg->value, &res, ptr->size);
 
     } else {

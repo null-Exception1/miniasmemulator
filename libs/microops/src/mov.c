@@ -5,7 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void mov(char *dest_addr, char *src_addr) {
+
+// int immediate_val;
+
+void mov_(char *dest_addr, char *src_addr) {
 
   bool destreg = false;
   Register *dest_reg;
@@ -20,6 +23,8 @@ void mov(char *dest_addr, char *src_addr) {
     src_reg = get_register(src_addr);
     srcreg = true;
   }
+
+  printf("%d %d \n", destreg, srcreg);
 
   if (srcreg && destreg) {
     memcpy(dest_reg->value, src_reg->value, 4);
@@ -36,6 +41,7 @@ void mov(char *dest_addr, char *src_addr) {
     parser(dest_addr, &offset2, &deref2, name2);
 
     Variable *ptr = get_var(name1, vartoaddr, &memory, var_ptr);
+
     if (!ptr) {
       fprintf(stderr, "Asm Error: Label/Value '%s' not found!\n", name1);
       exit(1);
@@ -45,8 +51,8 @@ void mov(char *dest_addr, char *src_addr) {
     unsigned char *final_dest_ptr = NULL;
 
     if (ptr->is_immediate == true) {
-
-      memcpy(dest_reg->value, ptr->address, ptr->size);
+      // printf("immediate_val %d", immediate_val);
+      memcpy(dest_reg->value, &immediate_val, 4);
 
     } else {
 

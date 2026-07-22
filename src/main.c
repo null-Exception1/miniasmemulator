@@ -26,6 +26,7 @@ Memory memory;
 int var_ptr = 0; // Initialized to 0
 Variable *vartoaddr = NULL;
 
+int immediate_val;
 int main() {
   unsigned char *global_start_addr;
   var_ptr = 0;
@@ -63,6 +64,7 @@ int main() {
          vartoaddr[1].size);
 
   // getting a variable from memory
+  /*
   Variable *ptr = get_var("myvar", vartoaddr, &memory, var_ptr);
 
   printf("get var %p %s %d\n", ptr->address, ptr->name, ptr->size);
@@ -72,18 +74,37 @@ int main() {
   memcpy(getval, (int *)ptr->address, ptr->size);
 
   printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
-
+  */
   // putting myvar in eax
-  mov_("eax", "myvar");
+  mov_("eax", "5");
 
   printf("eax value : ");
 
   show(eax.value, 4);
 
-  add_("eax", "myvar");
+  add_("eax", "6");
 
   printf("eax value : ");
 
   show(eax.value, 4);
+
+  sub_("eax", "7");
+
+  printf("eax value : ");
+
+  show(eax.value, 4);
+
+  mul_("eax", "2");
+
+  printf("eax value : ");
+
+  show(eax.value, 4);
+
+  div_("eax", "2");
+
+  printf("eax value : ");
+
+  show(eax.value, 4);
+  printf("eax value : %0.2f \n", (float)*eax.value);
   return 0;
 }

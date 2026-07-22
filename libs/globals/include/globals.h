@@ -33,6 +33,7 @@ typedef struct {
   int size;
   Type var_type;
   bool is_immediate;
+  int immediate_val;
 } Variable;
 
 typedef struct {
@@ -61,4 +62,5 @@ extern Memory memory;
 extern int var_ptr;
 extern Variable *vartoaddr;
 
+extern int immediate_val;
 #endif

@@ -47,7 +47,7 @@ void mul_(char *dest_addr, char *src_addr) {
 
     if (ptr->is_immediate == true) {
 
-      int res = *(int *)dest_reg->value * *(int *)ptr->address;
+      int res = *(int *)dest_reg->value * immediate_val;
       memcpy(dest_reg->value, &res, ptr->size);
 
     } else {
