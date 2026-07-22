@@ -45,7 +45,7 @@ int main() {
   show(memory.data, 100);
 
   // adding 2 inconspicous variables
-  int value[4] = {231401, 2, 3, 4};
+  int value[4] = {1, 2, 3, 4};
   add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
           INT);
 
@@ -74,11 +74,16 @@ int main() {
   printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
 
   // putting myvar in eax
-  mov("eax", "myvar", 4);
+  mov_("eax", "myvar");
 
   printf("eax value : ");
 
   show(eax.value, 4);
 
+  add_("eax", "myvar");
+
+  printf("eax value : ");
+
+  show(eax.value, 4);
   return 0;
 }

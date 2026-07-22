@@ -14,8 +14,10 @@ add_library(memory
 )
 add_library(microops
   libs/microops/src/mov.c
-  libs/microops/src/sub.c
-  libs/microops/src/add.c
+  libs/microops/src/alu/sub.c
+  libs/microops/src/alu/add.c
+  libs/microops/src/alu/mul.c
+  libs/microops/src/alu/div.c
 )
 add_library(compiler 
   libs/compiler/src/add_var.c

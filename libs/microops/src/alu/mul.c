@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void add(char *dest_addr, char *src_addr) {
+
+void mul(char *dest_addr, char *src_addr) {
   bool destreg = false;
   Register *dest_reg;
   if (get_register(dest_addr) != NULL) {
@@ -20,16 +21,8 @@ void add(char *dest_addr, char *src_addr) {
     srcreg = true;
   }
 
-  /*
-  add takes has following cases
-
-  add reg1, reg2
-  add [var], reg2
-  add reg1, [var]
-
-  */
   if (destreg && srcreg) {
-    int res = *(int *)dest_reg->value + *(int *)src_reg->value;
+    int res = *(int *)dest_reg->value * *(int *)src_reg->value;
     memcpy(dest_reg->value, &res, 4); // direction addition
   } else if (destreg && !srcreg) {
 
@@ -54,7 +47,7 @@ void add(char *dest_addr, char *src_addr) {
 
     if (ptr->is_immediate == true) {
 
-      int res = *(int *)dest_reg->value + *(int *)ptr->address;
+      int res = *(int *)dest_reg->value * *(int *)ptr->address;
       memcpy(dest_reg->value, &res, ptr->size);
 
     } else {
@@ -78,7 +71,7 @@ void add(char *dest_addr, char *src_addr) {
 
       printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
 
-      int res = *(int *)offset_addr1 + *(int *)offset_addr2;
+      int res = *(int *)offset_addr1 * *(int *)offset_addr2;
 
       memcpy(offset_addr2, &res, ptr->size);
     }
@@ -117,7 +110,7 @@ void add(char *dest_addr, char *src_addr) {
 
     printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
 
-    int res = *(int *)offset_addr1 + *(int *)offset_addr2;
+    int res = *(int *)offset_addr1 * *(int *)offset_addr2;
 
     memcpy(offset_addr2, &res, ptr->size);
   } else {

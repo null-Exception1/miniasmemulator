@@ -20,14 +20,6 @@ void sub(char *dest_addr, char *src_addr) {
     srcreg = true;
   }
 
-  /*
-  add takes has following cases
-
-  add reg1, reg2
-  add [var], reg2
-  add reg1, [var]
-
-  */
   if (destreg && srcreg) {
     int res = *(int *)dest_reg->value - *(int *)src_reg->value;
     memcpy(dest_reg->value, &res, 4); // direction addition
