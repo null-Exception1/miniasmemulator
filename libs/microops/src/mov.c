@@ -2,6 +2,7 @@
 #include <globals.h>
 #include <microops.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,22 +11,42 @@
 
 void mov_(char *dest_addr, char *src_addr) {
 
+  int offset1;
+  bool deref1;
+  char name1[10];
+  parser(src_addr, &offset1, &deref1, name1);
+
+  int offset2;
+  bool deref2;
+  char name2[10];
+  parser(dest_addr, &offset2, &deref2, name2);
+
   bool destreg = false;
   Register *dest_reg;
-  if (get_register(dest_addr) != NULL) {
-    dest_reg = get_register(dest_addr);
+  if (get_register(name2) != NULL) {
+    dest_reg = get_register(name2);
     destreg = true;
   }
 
   bool srcreg = false;
   Register *src_reg;
-  if (get_register(src_addr) != NULL) {
-    src_reg = get_register(src_addr);
+  if (get_register(name1) != NULL) {
+    src_reg = get_register(name1);
     srcreg = true;
   }
 
   if (srcreg && destreg) {
-    memcpy(dest_reg->value, src_reg->value, 4);
+    int offset1;
+    bool deref1;
+    char name1[10];
+    parser(dest_addr, &offset1, &deref1, name1);
+
+    if (deref1) {
+      memcpy(memory.data + *(int *)dest_reg->value, src_reg->value, 4);
+    } else {
+      memcpy(dest_reg->value, src_reg->value, 4);
+    }
+
   } else if (destreg && !srcreg) {
 
     int offset1;
@@ -50,17 +71,22 @@ void mov_(char *dest_addr, char *src_addr) {
 
     // printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
     // printf("%d \n", ptr->is_immediate);
-    // printf("%d %d \n", deref1, deref2);
+    printf("%d %d \n", deref1, deref2);
     if (ptr->is_immediate == true) {
       // printf("immediate_val %d", immediate_val);
       memcpy(dest_reg->value, &immediate_val, 4);
     } else {
+      uintptr_t addr_as_int;
 
       if (deref1) {
         offset_addr1 = offset_addr1 + offset1;
 
       } else {
-        offset_addr1 = ptr->address + offset1;
+        addr_as_int = (uintptr_t)(ptr->address - memory.data);
+        addr_as_int = (int)addr_as_int;
+        // printf("addr_as_int %d \n", addr_as_int);
+
+        offset_addr1 = (unsigned char *)&addr_as_int;
       }
       if (deref2 && deref1) {
         fprintf(stderr, "Asm Error: mem to mem not allowed! %s %s \n", name1,

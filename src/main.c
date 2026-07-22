@@ -81,17 +81,28 @@ int main() {
   add_var("myvalue", &memory, 4, (unsigned char *)&value, &var_ptr, vartoaddr,
           FLOAT);
 
+  int value2 = 1;
+  add_var("myvalue2", &memory, 4, (unsigned char *)&value2, &var_ptr, vartoaddr,
+          INT);
+
+  mov_("eax", "myvalue2");
+
+  mov_("ebx", "[myvalue]");
+
+  mov_("[eax]", "ebx");
+
   Variable *ptr = get_var("myvalue", vartoaddr, &memory, var_ptr);
-  show(ptr->address, 4);
-  printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
-  mov_("eax", "[myvalue]");
 
-  div_("eax", "2");
+  show(ptr->address, 10);
 
-  div_("eax", "2");
   printf("eax value : ");
-
   show(eax.value, 4);
+
+  printf("ebx value : ");
+  show(ebx.value, 4);
+
+  show(memory.data, 100);
+
   printf("eax value : %0.2f \n", *(float *)eax.value);
   return 0;
 }
