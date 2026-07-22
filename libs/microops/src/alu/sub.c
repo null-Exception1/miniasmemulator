@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void sub(char *dest_addr, char *src_addr) {
+void sub_(char *dest_addr, char *src_addr) {
   bool destreg = false;
   Register *dest_reg;
   if (get_register(dest_addr) != NULL) {
@@ -115,7 +115,7 @@ void sub(char *dest_addr, char *src_addr) {
   } else {
     fprintf(stderr,
             "Asm Error: Invalid memory-to-memory operation or bad syntax! "
-            "(e.g., add [var1], [var2] is not supported by x86 hardware)\n");
+            "(e.g., sub [var1], [var2] is not supported by x86 hardware)\n");
     exit(1);
   }
 }

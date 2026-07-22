@@ -18,6 +18,8 @@ add_library(microops
   libs/microops/src/alu/add.c
   libs/microops/src/alu/mul.c
   libs/microops/src/alu/div.c
+  libs/microops/src/logic/xor.c
+  libs/microops/src/logic/and.c
 )
 add_library(compiler 
   libs/compiler/src/add_var.c
