@@ -31,6 +31,9 @@ void add_var(char *name, Memory *memory, int size, unsigned char *value,
   case LONG_LONG:
     memcpy((long long *)memory->data_ptr, (long long *)value, size);
     break;
+  case FLOAT:
+    memcpy((float *)memory->data_ptr, (float *)value, size);
+    break;
   }
 
   // implement into malloc

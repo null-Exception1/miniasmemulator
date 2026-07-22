@@ -58,14 +58,10 @@ void sub_(char *dest_addr, char *src_addr) {
         offset_addr1 = ptr->address + offset1;
       }
 
-      if (deref2) {
-        offset_addr2 = offset_addr2 + offset2;
-      } else {
-        int reg_addr;
-        memcpy(&reg_addr, dest_reg->value, ptr->size);
-        int addr = (int)(reg_addr + offset2);
-        unsigned char *real_host_pointer = memory.data + addr;
-        offset_addr2 = real_host_pointer;
+      if (deref2 && deref1) {
+        fprintf(stderr, "Asm Error: mem to mem not allowed! %s %s \n", name1,
+                name2);
+        exit(1);
       }
 
       printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);

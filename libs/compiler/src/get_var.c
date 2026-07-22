@@ -18,6 +18,7 @@ Variable *get_var(char *name, Variable *vartoaddr, Memory *memory,
     for (int i = 0; i < var_ptr; i++) {
       Variable *curr_var = vartoaddr + i;
       if (strcmp(curr_var->name, name) == 0) {
+        curr_var->is_immediate = false;
         return curr_var;
       }
     }

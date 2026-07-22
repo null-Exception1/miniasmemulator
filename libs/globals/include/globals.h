@@ -25,6 +25,7 @@ typedef enum {
   DOUBLE,
   LONG,
   LONG_LONG,
+  FLOAT,
 } Type;
 
 typedef struct {

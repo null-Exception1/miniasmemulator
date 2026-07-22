@@ -44,7 +44,7 @@ int main() {
   memory.stack_end = global_start_addr + STACK_LEN;
 
   show(memory.data, 100);
-
+  /*
   // adding 2 inconspicous variables
   int value[4] = {1, 2, 3, 4};
   add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
@@ -64,7 +64,7 @@ int main() {
          vartoaddr[1].size);
 
   // getting a variable from memory
-  /*
+
   Variable *ptr = get_var("myvar", vartoaddr, &memory, var_ptr);
 
   printf("get var %p %s %d\n", ptr->address, ptr->name, ptr->size);
@@ -76,35 +76,22 @@ int main() {
   printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
   */
   // putting myvar in eax
-  mov_("eax", "5");
 
-  printf("eax value : ");
+  float value = 0.5f;
+  add_var("myvalue", &memory, 4, (unsigned char *)&value, &var_ptr, vartoaddr,
+          FLOAT);
 
-  show(eax.value, 4);
-
-  add_("eax", "6");
-
-  printf("eax value : ");
-
-  show(eax.value, 4);
-
-  sub_("eax", "7");
-
-  printf("eax value : ");
-
-  show(eax.value, 4);
-
-  mul_("eax", "2");
-
-  printf("eax value : ");
-
-  show(eax.value, 4);
+  Variable *ptr = get_var("myvalue", vartoaddr, &memory, var_ptr);
+  show(ptr->address, 4);
+  printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
+  mov_("eax", "[myvalue]");
 
   div_("eax", "2");
 
+  div_("eax", "2");
   printf("eax value : ");
 
   show(eax.value, 4);
-  printf("eax value : %0.2f \n", (float)*eax.value);
+  printf("eax value : %0.2f \n", *(float *)eax.value);
   return 0;
 }

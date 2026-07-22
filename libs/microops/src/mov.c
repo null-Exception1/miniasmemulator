@@ -24,8 +24,6 @@ void mov_(char *dest_addr, char *src_addr) {
     srcreg = true;
   }
 
-  printf("%d %d \n", destreg, srcreg);
-
   if (srcreg && destreg) {
     memcpy(dest_reg->value, src_reg->value, 4);
   } else if (destreg && !srcreg) {
@@ -50,10 +48,12 @@ void mov_(char *dest_addr, char *src_addr) {
     unsigned char *offset_addr2 = dest_reg->value;
     unsigned char *final_dest_ptr = NULL;
 
+    // printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
+    // printf("%d \n", ptr->is_immediate);
+    // printf("%d %d \n", deref1, deref2);
     if (ptr->is_immediate == true) {
       // printf("immediate_val %d", immediate_val);
       memcpy(dest_reg->value, &immediate_val, 4);
-
     } else {
 
       if (deref1) {
@@ -62,18 +62,12 @@ void mov_(char *dest_addr, char *src_addr) {
       } else {
         offset_addr1 = ptr->address + offset1;
       }
-
-      if (deref2) {
-        offset_addr2 = offset_addr2 + offset2;
-      } else {
-        int reg_addr;
-        memcpy(&reg_addr, dest_reg->value, ptr->size);
-        int addr = (int)(reg_addr + offset2);
-        unsigned char *real_host_pointer = memory.data + addr;
-        offset_addr2 = real_host_pointer;
+      if (deref2 && deref1) {
+        fprintf(stderr, "Asm Error: mem to mem not allowed! %s %s \n", name1,
+                name2);
+        exit(1);
       }
-
-      printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
+      // printf("%p %p %d \n", offset_addr1, dest_reg->value, ptr->size);
       memcpy(offset_addr2, offset_addr1, ptr->size);
     }
   } else if (!destreg && srcreg) {
