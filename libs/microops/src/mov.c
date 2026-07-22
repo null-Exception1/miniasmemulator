@@ -7,134 +7,59 @@
 #include <stdlib.h>
 #include <string.h>
 
-// int immediate_val;
+void offset_and_write_reg(unsigned char *offset_addr1,
+                          unsigned char *offset_addr2, int offset1, int offset2,
+                          bool deref1, bool deref2, Variable *ptr,
+                          Register *dest_reg) {
 
-void mov_(char *dest_addr, char *src_addr) {
+  if (ptr->is_immediate == true) {
+    memcpy(dest_reg->value, &immediate_val, 4);
+  } else {
 
-  int offset1;
-  bool deref1;
-  char name1[10];
-  parser(src_addr, &offset1, &deref1, name1);
-
-  int offset2;
-  bool deref2;
-  char name2[10];
-  parser(dest_addr, &offset2, &deref2, name2);
-
-  bool destreg = false;
-  Register *dest_reg;
-  if (get_register(name2) != NULL) {
-    dest_reg = get_register(name2);
-    destreg = true;
-  }
-
-  bool srcreg = false;
-  Register *src_reg;
-  if (get_register(name1) != NULL) {
-    src_reg = get_register(name1);
-    srcreg = true;
-  }
-
-  if (srcreg && destreg) {
-    int offset1;
-    bool deref1;
-    char name1[10];
-    parser(dest_addr, &offset1, &deref1, name1);
+    int addr_as_int = (int)(ptr->address - memory.data);
 
     if (deref1) {
-      memcpy(memory.data + *(int *)dest_reg->value, src_reg->value, 4);
+      offset_addr1 = offset_addr1 + offset1;
     } else {
-      memcpy(dest_reg->value, src_reg->value, 4);
-    }
+      offset_addr1 = (unsigned char *)&addr_as_int;
 
-  } else if (destreg && !srcreg) {
-
-    int offset1;
-    bool deref1;
-    char name1[10];
-    parser(src_addr, &offset1, &deref1, name1);
-
-    int offset2;
-    bool deref2;
-    char name2[10];
-    parser(dest_addr, &offset2, &deref2, name2);
-
-    Variable *ptr = get_var(name1, vartoaddr, &memory, var_ptr);
-
-    if (!ptr) {
-      fprintf(stderr, "Asm Error: Label/Value '%s' not found!\n", name1);
-      exit(1);
-    }
-    unsigned char *offset_addr1 = ptr->address;
-    unsigned char *offset_addr2 = dest_reg->value;
-    unsigned char *final_dest_ptr = NULL;
-
-    // printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
-    // printf("%d \n", ptr->is_immediate);
-    printf("%d %d \n", deref1, deref2);
-    if (ptr->is_immediate == true) {
-      // printf("immediate_val %d", immediate_val);
-      memcpy(dest_reg->value, &immediate_val, 4);
-    } else {
-      uintptr_t addr_as_int;
-
-      if (deref1) {
-        offset_addr1 = offset_addr1 + offset1;
-
-      } else {
-        addr_as_int = (uintptr_t)(ptr->address - memory.data);
-        addr_as_int = (int)addr_as_int;
-        // printf("addr_as_int %d \n", addr_as_int);
-
-        offset_addr1 = (unsigned char *)&addr_as_int;
-      }
-      if (deref2 && deref1) {
-        fprintf(stderr, "Asm Error: mem to mem not allowed! %s %s \n", name1,
-                name2);
-        exit(1);
-      }
-      // printf("%p %p %d \n", offset_addr1, dest_reg->value, ptr->size);
       memcpy(offset_addr2, offset_addr1, ptr->size);
+      return;
     }
-  } else if (!destreg && srcreg) {
-    int offset1;
-    bool deref1;
-    char name1[10];
-    parser(src_addr, &offset1, &deref1, name1);
 
-    int offset2;
-    bool deref2;
-    char name2[10];
-    parser(dest_addr, &offset2, &deref2, name2);
-
-    if (!deref2) {
-      fprintf(
-          stderr,
-          "Asm Error: Destination must be dereferenced! Did you mean [%s]?\n",
-          dest_addr);
+    if (deref2 && deref1) {
+      fprintf(stderr, "Asm Error: mem to mem not allowed!");
       exit(1);
     }
 
-    Variable *ptr = get_var(name2, vartoaddr, &memory, var_ptr);
-    if (!ptr) {
-      fprintf(stderr, "Asm Error: Label/Value '%s' not found!\n", name2);
-      exit(1);
-    }
-    unsigned char *offset_addr1 = src_reg->value;
-    unsigned char *offset_addr2 = ptr->address;
-
-    if (deref2) {
-      offset_addr2 = offset_addr2 + offset2;
-    } else {
-      offset_addr2 = ptr->address + offset2;
-    }
-
-    printf("%p %s %d \n", ptr->address, ptr->name, ptr->size);
+    // final write
     memcpy(offset_addr2, offset_addr1, ptr->size);
-  } else {
-    fprintf(stderr,
-            "Asm Error: Invalid memory-to-memory operation or bad syntax! "
-            "(e.g., mov [var1], [var2] is not supported by x86 hardware)\n");
-    exit(1);
   }
+}
+
+void offset_and_write_addr(unsigned char *offset_addr1,
+                           unsigned char *offset_addr2, int offset1,
+                           int offset2, bool deref1, bool deref2,
+                           Variable *ptr) {
+  if (deref2) {
+    offset_addr2 = offset_addr2 + offset2;
+  } else {
+    offset_addr2 = ptr->address + offset2;
+  }
+  memcpy(offset_addr2, offset_addr1, ptr->size);
+}
+
+void offset_and_write_reg_from_reg(Register *dest_reg, Register *src_reg,
+                                   int offset2, bool deref2) {
+
+  if (deref2) {
+    memcpy(memory.data + *(int *)dest_reg->value + offset2, src_reg->value, 4);
+  } else {
+    memcpy(dest_reg->value, src_reg->value, 4);
+  }
+}
+
+void mov_(char *dest_addr, char *src_addr) {
+  operand_parse(dest_addr, src_addr, offset_and_write_reg,
+                offset_and_write_addr, offset_and_write_reg_from_reg);
 }

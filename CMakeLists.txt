@@ -29,6 +29,7 @@ add_library(compiler
   libs/compiler/src/get_var.c
   libs/compiler/src/get_register.c
   libs/compiler/src/addressing.c
+  libs/compiler/src/global_parser.c
 )
 target_include_directories(microops PUBLIC libs/microops/include)
 target_include_directories(microops PUBLIC libs/globals/include)
@@ -44,7 +45,7 @@ target_include_directories(memory PUBLIC libs/memory/include)
 target_include_directories(compiler PUBLIC libs/globals/include)
 target_include_directories(compiler PUBLIC libs/compiler/include)
 target_include_directories(compiler PUBLIC libs/memory/include)
-
+target_include_directories(compiler PUBLIC libs/microop/include)
 target_link_libraries(memory PUBLIC m)
 target_link_libraries(microops PUBLIC compiler)
 target_link_libraries(main PUBLIC memory compiler microops)

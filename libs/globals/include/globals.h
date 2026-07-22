@@ -7,6 +7,7 @@
 #define VARIABLE_LIMIT 100
 
 #include <stdbool.h>
+
 typedef struct {
   unsigned char *data;
   unsigned char *data_ptr;
@@ -64,4 +65,11 @@ extern int var_ptr;
 extern Variable *vartoaddr;
 
 extern int immediate_val;
+
+typedef void (*write_reg)(unsigned char *, unsigned char *, int, int, bool,
+                          bool, Variable *, Register *);
+typedef void (*write_addr)(unsigned char *, unsigned char *, int, int, bool,
+                           bool, Variable *);
+typedef void (*write_reg_from_reg)(Register *dest_reg, Register *src_reg,
+                                   int offset2, bool deref2);
 #endif

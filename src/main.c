@@ -103,6 +103,5 @@ int main() {
 
   show(memory.data, 100);
 
-  printf("eax value : %0.2f \n", *(float *)eax.value);
   return 0;
 }
