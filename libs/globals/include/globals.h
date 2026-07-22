@@ -60,6 +60,14 @@ extern Register ebp;
 extern Register eip;
 extern Register esp;
 
+typedef struct {
+  int zero_flag;
+  int carry_flag;
+  int sign_flag;
+  int overflow_flag;
+} Flags;
+
+extern Flags flags;
 extern Memory memory;
 extern int var_ptr;
 extern Variable *vartoaddr;
@@ -72,4 +80,5 @@ typedef void (*write_addr)(unsigned char *, unsigned char *, int, int, bool,
                            bool, Variable *);
 typedef void (*write_reg_from_reg)(Register *dest_reg, Register *src_reg,
                                    int offset2, bool deref2);
+
 #endif
