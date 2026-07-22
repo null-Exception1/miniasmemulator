@@ -21,7 +21,7 @@ add_library(microops
   libs/microops/src/logic/and.c
   libs/microops/src/logic/or.c
   libs/microops/src/logic/not.c
-  libs/microops/src/mov.c
+  libs/microops/src/memory/mov.c
   libs/microops/src/flow/cmp.c
 )
 add_library(compiler 

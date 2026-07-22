@@ -2,6 +2,7 @@
 #include <globals.h>
 #include <memory.h>
 #include <microops.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -23,7 +24,7 @@ Register eip;
 Register esp;
 
 Memory memory;
-int var_ptr = 0; // Initialized to 0
+int var_ptr = 0;
 Variable *vartoaddr = NULL;
 
 int immediate_val;
@@ -31,51 +32,23 @@ int main() {
   unsigned char *global_start_addr;
   var_ptr = 0;
   init_memory(&global_start_addr, &vartoaddr);
+
   memory.data = global_start_addr;
   memory.data_ptr = global_start_addr;
   memory.data_end = global_start_addr + DATA_LEN;
 
-  memory.code = memory.data;
+  memory.code = memory.data_end;
   memory.code_ptr = global_start_addr;
   memory.code_end = global_start_addr + CODE_LEN;
 
-  memory.stack = memory.code;
+  memory.stack = memory.code_end;
   memory.stack_ptr = global_start_addr;
   memory.stack_end = global_start_addr + STACK_LEN;
 
-  show(memory.data, 100);
-  /*
-  // adding 2 inconspicous variables
-  int value[4] = {1, 2, 3, 4};
-  add_var("myvar", &memory, 4 * 4, (unsigned char *)value, &var_ptr, vartoaddr,
-          INT);
-
-  char value2[10] = "Teri mkc";
-  add_var("myvar2", &memory, strlen(value2) + 1, (unsigned char *)&value2,
-          &var_ptr, vartoaddr, CHAR);
+  int addr = (int)(memory.stack_end - memory.data);
+  memcpy(esp.value, &addr, 4);
 
   show(memory.data, 100);
-
-  show((unsigned char *)vartoaddr, 100);
-
-  printf("%p %s %d \n", vartoaddr[0].address, vartoaddr[0].name,
-         vartoaddr[0].size);
-  printf("%p %s %d \n", vartoaddr[1].address, vartoaddr[1].name,
-         vartoaddr[1].size);
-
-  // getting a variable from memory
-
-  Variable *ptr = get_var("myvar", vartoaddr, &memory, var_ptr);
-
-  printf("get var %p %s %d\n", ptr->address, ptr->name, ptr->size);
-
-  int getval[4];
-
-  memcpy(getval, (int *)ptr->address, ptr->size);
-
-  printf("%d %d %d %d\n", getval[0], getval[1], getval[2], getval[3]);
-  */
-  // putting myvar in eax
 
   float value = 0.5f;
   add_var("myvalue", &memory, 4, (unsigned char *)&value, &var_ptr, vartoaddr,
