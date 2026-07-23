@@ -5,22 +5,22 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-static inline int op(int a, int b) {
+
+static inline void op(int a, int b) {
   // simulating alu subtraction here cuz im too lazy to recreate the fking
   // alu right now
   int res = a - b;
-  if (res < 0) {
-    flags.sign_flag = 1;
-    flags.carry_flag = 1;
-    flags.zero_flag = 0;
-  } else if (res > 0) {
-    flags.sign_flag = 0;
-    flags.carry_flag = 0;
-    flags.zero_flag = 0;
-  } else if (res == 0) {
-    flags.sign_flag = 0;
-    flags.carry_flag = 0;
-    flags.zero_flag = 1;
+
+  uint32_t ua = (uint32_t)a;
+  uint32_t ub = (uint32_t)b;
+
+  flags.zero_flag = (res == 0) ? 1 : 0;
+  flags.sign_flag = (res < 0) ? 1 : 0;
+  flags.carry_flag = (ua < ub) ? 1 : 0;
+  if ((a > 0 && b < 0 && res < 0) || (a < 0 && b > 0 && res > 0)) {
+    flags.overflow_flag = 1;
+  } else {
+    flags.overflow_flag = 0;
   }
 }
 

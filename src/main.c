@@ -4,6 +4,7 @@
 #include <microops.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void show(unsigned char *addr, int len) {
@@ -28,6 +29,7 @@ int var_ptr = 0;
 Variable *vartoaddr = NULL;
 Flags flags;
 int immediate_val;
+
 int main() {
   unsigned char *global_start_addr;
   var_ptr = 0;
@@ -38,50 +40,96 @@ int main() {
   memory.data_end = global_start_addr + DATA_LEN;
 
   memory.code = memory.data_end;
-  memory.code_ptr = global_start_addr;
-  memory.code_end = global_start_addr + CODE_LEN;
+  memory.code_ptr = memory.data_end;
+  memory.code_end = memory.data_end + CODE_LEN;
 
   memory.stack = memory.code_end;
-  memory.stack_ptr = global_start_addr;
-  memory.stack_end = global_start_addr + STACK_LEN;
+  memory.stack_ptr = memory.code_end;
+  memory.stack_end = memory.code_end + STACK_LEN;
 
   int addr = (int)(memory.stack_end - memory.data);
   memcpy(esp.value, &addr, 4);
 
-  show(memory.data, 100);
+  addr = (int)(memory.code - memory.data);
+  memcpy(eip.value, &addr, 4);
 
-  // 1. Clear out your register states cleanly
-  *(int *)eax.value = 0;
-  *(int *)ebx.value = 0;
+  int initial_ecx = 3;
+  memcpy(ecx.value, &initial_ecx, 4);
 
-  // 2. Initialize two trackable dummy variables in your virtual RAM
-  int initial_val = 15;
-  add_var("vA", &memory, 4, (unsigned char *)&initial_val, &var_ptr, vartoaddr,
+  int initial_eax = 0;
+  memcpy(eax.value, &initial_eax, 4);
+
+  int const_1 = 1;
+  add_var("1", &memory, 4, (unsigned char *)&const_1, &var_ptr, vartoaddr, INT);
+
+  int const_10 = 10;
+  add_var("10", &memory, 4, (unsigned char *)&const_10, &var_ptr, vartoaddr,
           INT);
 
-  int factor_val = 5;
-  add_var("vB", &memory, 4, (unsigned char *)&factor_val, &var_ptr, vartoaddr,
-          INT);
+  int const_0 = 0;
+  add_var("0", &memory, 4, (unsigned char *)&const_0, &var_ptr, vartoaddr, INT);
 
-  printf("--- BOOTING EMULATOR EXECUTION ENGINE ---\n");
+  int const_addr = (int)(memory.code_ptr - memory.data);
+  printf("%d", const_addr);
+  add_var("my_count", &memory, sizeof(Instruction),
+          (unsigned char *)&const_addr, &var_ptr, vartoaddr, INT);
 
-  // Test Case 1: Data Movement & Generic ALU Integration
-  mov_("eax", "vA"); // eax should become 15
-  add_("eax", "vB"); // eax = 15 + 5 = 20
-  printf("[ALU TEST] Expected EAX: 20 | Actual Hex: ");
-  show(eax.value, 4);
+  add_ins("add", "eax", "10");
+  add_ins("sub", "ecx", "1");
+  add_ins("cmp", "ecx", "0");
+  add_ins("jne", "my_count", "");
+  add_ins("hlt", "", "");
 
-  // Test Case 2: The Downward Stack Pipeline
-  push_("eax");     // Push 20 onto the stack frame
-  mov_("eax", "0"); // Wipe out eax to prove the stack works
-  pop_("ebx");      // Pop the top 4 bytes out into ebx
-  printf("[STACK TEST] Expected EBX: 20 | Actual Hex: ");
-  show(ebx.value, 4);
+  printf("\n=======================================================\n");
+  printf("   🚀 EMULATOR INITIALISED: BOOTING CONTROL UNIT 🚀   \n");
+  printf("=======================================================\n");
+  printf("Starting Counter (ECX): %d\n", *(int *)ecx.value);
+  printf("Starting Value   (EAX): %d\n", *(int *)eax.value);
+  printf("Virtual EIP Base Offset: %d\n", addr);
+  printf("=======================================================\n\n");
 
-  // Test Case 3: Refactored Subtraction Logic Bounds
-  sub_("ebx", "vB"); // ebx = 20 - 5 = 15
-  printf("[SUB TEST] Expected EBX: 15 | Actual Hex: ");
-  show(ebx.value, 4);
+  int curr_ins_address;
+  memcpy(&curr_ins_address, eip.value, 4);
+  unsigned char *actual_ptr;
+  int cycle_count = 1;
 
-  return 0;
+  for (int i = 0; i < 20; i++) {
+    actual_ptr = (unsigned char *)(curr_ins_address + memory.data);
+    Instruction *ptr = (Instruction *)actual_ptr;
+
+    printf("╔══ [CYCLE %d] ════════════════════════════════════════\n",
+           cycle_count++);
+
+    printf("║ FETCH  -> EIP Virtual Address: %d\n", curr_ins_address);
+    printf("║ DECODE -> ");
+
+    read_ins(ptr);
+
+    printf("║ EXECUTE STATUS:\n");
+    printf("║   Registers -> EAX: %-5d | ECX: %-5d\n", *(int *)eax.value,
+           *(int *)ecx.value);
+    printf("║   EFLAGS    -> ZF:  %-5d | SF:  %-5d | CF:  %-5d\n",
+           flags.zero_flag, flags.sign_flag, flags.carry_flag);
+    printf("╚═══════════════════════════════════════════════════════\n\n");
+
+    if (strcmp("hlt", ptr->op) == 0) {
+      printf("=======================================================\n");
+      printf("   🛑 CPU HALTED GRACEFULLY: EXECUTION TERMINATED 🛑   \n");
+      printf("=======================================================\n");
+      printf("Final Register Verification Summary:\n");
+      printf("  EAX (Accumulator Total): %d (Expected: 30)\n",
+             *(int *)eax.value);
+      printf("  ECX (Loop Counter state): %d (Expected: 0)\n",
+             *(int *)ecx.value);
+      printf("=======================================================\n");
+      exit(0);
+    }
+
+    if (ptr->op[0] != 'j') {
+      curr_ins_address += sizeof(Instruction);
+      memcpy(eip.value, &curr_ins_address, 4);
+    } else {
+      memcpy(&curr_ins_address, eip.value, 4);
+    }
+  }
 }

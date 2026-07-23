@@ -7,7 +7,6 @@
 #define VARIABLE_LIMIT 100
 
 #include <stdbool.h>
-
 typedef struct {
   unsigned char *data;
   unsigned char *data_ptr;
@@ -28,7 +27,6 @@ typedef enum {
   LONG_LONG,
   FLOAT,
 } Type;
-
 typedef struct {
   char name[10];
   unsigned char *address;
@@ -73,6 +71,12 @@ extern int var_ptr;
 extern Variable *vartoaddr;
 
 extern int immediate_val;
+
+typedef struct {
+  char op[4];
+  char operand1[15];
+  char operand2[15];
+} Instruction;
 
 typedef void (*write_reg)(unsigned char *, unsigned char *, int, int, bool,
                           bool, Variable *, Register *);

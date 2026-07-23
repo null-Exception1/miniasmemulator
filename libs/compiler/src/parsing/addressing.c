@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 void parser(char *string, int *offset, bool *deref, char *var_name) {
@@ -12,7 +11,6 @@ void parser(char *string, int *offset, bool *deref, char *var_name) {
     }
     j++;
   }
-  // printf("var name %s \n", string);
   if (!numeric) {
     int len = strlen(string);
     int start_idx = 0;

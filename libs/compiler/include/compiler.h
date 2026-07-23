@@ -10,4 +10,6 @@ void operand_parse(char *dest_addr, char *src_addr,
                    write_reg offset_and_write_reg,
                    write_addr offset_and_write_addr,
                    write_reg_from_reg offset_and_write_reg_from_reg);
+void add_ins(char *op, char *operand1, char *operand2);
+void read_ins(Instruction *ins);
 #endif

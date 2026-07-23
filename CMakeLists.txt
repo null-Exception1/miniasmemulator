@@ -5,8 +5,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 add_executable(main
 src/main.c
-libs/compiler/src/add_var.c
-libs/compiler/include/compiler.h
 )
 
 add_library(memory
@@ -25,13 +23,16 @@ add_library(microops
   libs/microops/src/flow/cmp.c
   libs/microops/src/stack/push.c
   libs/microops/src/stack/pop.c
+  libs/microops/src/memory/jmp.c
 )
 add_library(compiler 
-  libs/compiler/src/add_var.c
-  libs/compiler/src/get_var.c
-  libs/compiler/src/get_register.c
-  libs/compiler/src/addressing.c
-  libs/compiler/src/global_parser.c
+  libs/compiler/src/variables/add_var.c
+  libs/compiler/src/variables/get_var.c
+  libs/compiler/src/helpers/get_register.c
+  libs/compiler/src/parsing/addressing.c
+  libs/compiler/src/parsing/global_parser.c
+  libs/compiler/src/instructions/read_ins.c
+  libs/compiler/src/instructions/add_ins.c
 )
 target_include_directories(microops PUBLIC libs/microops/include)
 target_include_directories(microops PUBLIC libs/globals/include)
@@ -47,7 +48,8 @@ target_include_directories(memory PUBLIC libs/memory/include)
 target_include_directories(compiler PUBLIC libs/globals/include)
 target_include_directories(compiler PUBLIC libs/compiler/include)
 target_include_directories(compiler PUBLIC libs/memory/include)
-target_include_directories(compiler PUBLIC libs/microop/include)
+target_include_directories(compiler PUBLIC libs/microops/include)
+
 target_link_libraries(memory PUBLIC m)
 target_link_libraries(microops PUBLIC compiler)
 target_link_libraries(main PUBLIC memory compiler microops)
