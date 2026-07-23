@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/main.dir/src/main.c.o -o main  libmemory.a libcompiler.a libmicroops.a -lm libcompiler.a 

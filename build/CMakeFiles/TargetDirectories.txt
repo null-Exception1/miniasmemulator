@@ -1,0 +1,6 @@
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/main.dir
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/memory.dir
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/microops.dir
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/compiler.dir
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/edit_cache.dir
+/home/shaurya_pratap/projects/miniasmemulator/build/CMakeFiles/rebuild_cache.dir

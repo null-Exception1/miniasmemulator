@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcompiler.a CMakeFiles/compiler.dir/libs/compiler/src/variables/add_var.c.o CMakeFiles/compiler.dir/libs/compiler/src/variables/get_var.c.o CMakeFiles/compiler.dir/libs/compiler/src/helpers/get_register.c.o CMakeFiles/compiler.dir/libs/compiler/src/parsing/addressing.c.o CMakeFiles/compiler.dir/libs/compiler/src/parsing/global_parser.c.o CMakeFiles/compiler.dir/libs/compiler/src/instructions/read_ins.c.o CMakeFiles/compiler.dir/libs/compiler/src/instructions/add_ins.c.o
+/usr/bin/ranlib libcompiler.a

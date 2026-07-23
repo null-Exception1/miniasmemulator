@@ -1,0 +1,112 @@
+[
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/memory.dir/libs/memory/src/init.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/memory/src/init.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/memory/src/init.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/variables/add_var.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/variables/add_var.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/variables/add_var.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/variables/get_var.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/variables/get_var.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/variables/get_var.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/helpers/get_register.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/helpers/get_register.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/helpers/get_register.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/parsing/addressing.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/parsing/addressing.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/parsing/addressing.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/parsing/global_parser.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/parsing/global_parser.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/parsing/global_parser.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/instructions/read_ins.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/instructions/read_ins.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/instructions/read_ins.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/compiler.dir/libs/compiler/src/instructions/add_ins.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/instructions/add_ins.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/src/instructions/add_ins.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/alu/sub.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/sub.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/sub.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/alu/add.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/add.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/add.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/alu/mul.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/mul.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/mul.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/alu/div.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/div.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/alu/div.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/logic/xor.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/xor.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/xor.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/logic/and.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/and.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/and.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/logic/or.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/or.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/or.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/logic/not.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/not.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/logic/not.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/memory/mov.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/memory/mov.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/memory/mov.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/flow/cmp.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/flow/cmp.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/flow/cmp.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/stack/push.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/stack/push.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/stack/push.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/stack/pop.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/stack/pop.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/stack/pop.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -g -std=gnu11 -o CMakeFiles/microops.dir/libs/microops/src/memory/jmp.c.o -c /home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/memory/jmp.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/libs/microops/src/memory/jmp.c"
+},
+{
+  "directory": "/home/shaurya_pratap/projects/miniasmemulator/build",
+  "command": "/usr/bin/cc  -I/home/shaurya_pratap/projects/miniasmemulator/libs/globals/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/compiler/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/memory/include -I/home/shaurya_pratap/projects/miniasmemulator/libs/microops/include -g -std=gnu11 -o CMakeFiles/main.dir/src/main.c.o -c /home/shaurya_pratap/projects/miniasmemulator/src/main.c",
+  "file": "/home/shaurya_pratap/projects/miniasmemulator/src/main.c"
+}
+]
