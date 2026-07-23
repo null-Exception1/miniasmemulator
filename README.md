@@ -12,9 +12,9 @@ the emulator simulates a physical hardware processor layout within a single host
 |      memory.data (0x0000)       |      memory.code (0x0400)       |      memory.stack (0x0C00)      |
 |  Variables & Literal Constants  |    Instruction Struct Cache     |   Downward-Growing Stack Frame  |
 +---------------------------------+---------------------------------+---------------------------------+
-                                                                                      ^
-                                                                                      | 
-                                                                                  esp.value
+                                                 ^                                    ^
+                                                 |                                    | 
+                                              eip.value                            esp.value
 ```
 
 ### Core Component Specifications
