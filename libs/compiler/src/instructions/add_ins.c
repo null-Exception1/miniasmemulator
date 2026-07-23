@@ -12,7 +12,5 @@ void add_ins(char *op, char *operand1, char *operand2) {
 
   memcpy(memory.code_ptr, &ins, sizeof(ins));
 
-  printf("code ptr %p \n", memory.code_ptr);
-
   memory.code_ptr += sizeof(ins);
 }

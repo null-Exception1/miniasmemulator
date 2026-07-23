@@ -61,9 +61,9 @@ int main() {
 
   int const_addr = (int)(memory.code_ptr - memory.data);
   printf("%d", const_addr);
+
   add_var("my_count", &memory, sizeof(Instruction),
           (unsigned char *)&const_addr, &var_ptr, vartoaddr, INT);
-
   add_ins("add", "eax", "10");
   add_ins("sub", "ecx", "1");
   add_ins("cmp", "ecx", "0");

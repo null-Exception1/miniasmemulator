@@ -59,7 +59,7 @@ void operand_parse(char *dest_addr, char *src_addr,
     if (!deref2) {
       fprintf(
           stderr,
-          "Asm Error: Destination must be dereferenced! Did you mean [%s]?\n",
+          "Asm Error: destination must be dereferenced! did you mean [%s]?\n",
           dest_addr);
       exit(1);
     }
@@ -67,7 +67,7 @@ void operand_parse(char *dest_addr, char *src_addr,
     Variable *ptr = get_var(name2, vartoaddr, &memory, var_ptr);
 
     if (!ptr) {
-      fprintf(stderr, "Asm Error: Label/Value '%s' not found!\n", name2);
+      fprintf(stderr, "Asm Error: label/value '%s' not found!\n", name2);
       exit(1);
     }
     unsigned char *offset_addr1 = src_reg->value;
@@ -77,7 +77,7 @@ void operand_parse(char *dest_addr, char *src_addr,
                           deref2, ptr);
   } else {
     fprintf(stderr,
-            "Asm Error: Invalid memory-to-memory operation or bad syntax! "
+            "Asm Error: invalid memory-to-memory operation or bad syntax! "
             "(e.g., mov [var1], [var2] is not supported by x86 hardware)\n");
     exit(1);
   }
