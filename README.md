@@ -19,9 +19,8 @@ the emulator simulates a physical hardware processor layout within a single host
 
 ### Core Component Specifications
 - layout partitions separating data (`memory.data`), code (`memory.code`), and stack (`memory.stack`)
-- features a centralized string-tokenization functional router (`operand_parse`) that utilizes file-private `static` pointer callbacks to decouple raw string processing from mathematical execution.
 - standardized operations `add`, `sub`, `and`, `or`, `not`, and `xor` 
-- implements an exact `Flags` register mapping state transitions for `zero_flag`, `sign_flag`, and `carry_flag` by utilizing native `uint32_t` type casting to catch unsigned underflows (borrows).
+- implements a `Flags` register mapping state transitions for `zero_flag`, `sign_flag`, and `carry_flag` by utilizing native `uint32_t` type casting to catch unsigned underflows (borrows).
 - implements conditional and unconditional indirect/direct branching (`jmp`, `je`, `jne`,`jl`,`jg`, `ja`, `jb`). 
 ---
 
