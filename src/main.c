@@ -26,7 +26,7 @@ Register esp;
 Memory memory;
 int var_ptr = 0;
 Variable *vartoaddr = NULL;
-
+Flags flags;
 int immediate_val;
 int main() {
   unsigned char *global_start_addr;
@@ -50,31 +50,38 @@ int main() {
 
   show(memory.data, 100);
 
-  float value = 0.5f;
-  add_var("myvalue", &memory, 4, (unsigned char *)&value, &var_ptr, vartoaddr,
-          FLOAT);
+  // 1. Clear out your register states cleanly
+  *(int *)eax.value = 0;
+  *(int *)ebx.value = 0;
 
-  int value2 = 1;
-  add_var("myvalue2", &memory, 4, (unsigned char *)&value2, &var_ptr, vartoaddr,
+  // 2. Initialize two trackable dummy variables in your virtual RAM
+  int initial_val = 15;
+  add_var("vA", &memory, 4, (unsigned char *)&initial_val, &var_ptr, vartoaddr,
           INT);
 
-  mov_("eax", "myvalue2");
+  int factor_val = 5;
+  add_var("vB", &memory, 4, (unsigned char *)&factor_val, &var_ptr, vartoaddr,
+          INT);
 
-  mov_("ebx", "[myvalue]");
+  printf("--- BOOTING EMULATOR EXECUTION ENGINE ---\n");
 
-  mov_("[eax]", "ebx");
-
-  Variable *ptr = get_var("myvalue", vartoaddr, &memory, var_ptr);
-
-  show(ptr->address, 10);
-
-  printf("eax value : ");
+  // Test Case 1: Data Movement & Generic ALU Integration
+  mov_("eax", "vA"); // eax should become 15
+  add_("eax", "vB"); // eax = 15 + 5 = 20
+  printf("[ALU TEST] Expected EAX: 20 | Actual Hex: ");
   show(eax.value, 4);
 
-  printf("ebx value : ");
+  // Test Case 2: The Downward Stack Pipeline
+  push_("eax");     // Push 20 onto the stack frame
+  mov_("eax", "0"); // Wipe out eax to prove the stack works
+  pop_("ebx");      // Pop the top 4 bytes out into ebx
+  printf("[STACK TEST] Expected EBX: 20 | Actual Hex: ");
   show(ebx.value, 4);
 
-  show(memory.data, 100);
+  // Test Case 3: Refactored Subtraction Logic Bounds
+  sub_("ebx", "vB"); // ebx = 20 - 5 = 15
+  printf("[SUB TEST] Expected EBX: 15 | Actual Hex: ");
+  show(ebx.value, 4);
 
   return 0;
 }

@@ -7,10 +7,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void offset_and_write_reg(unsigned char *offset_addr1,
-                          unsigned char *offset_addr2, int offset1, int offset2,
-                          bool deref1, bool deref2, Variable *ptr,
-                          Register *dest_reg) {
+static void offset_and_write_reg(unsigned char *offset_addr1,
+                                 unsigned char *offset_addr2, int offset1,
+                                 int offset2, bool deref1, bool deref2,
+                                 Variable *ptr, Register *dest_reg) {
 
   if (ptr->is_immediate == true) {
     memcpy(dest_reg->value, &immediate_val, 4);
@@ -37,10 +37,10 @@ void offset_and_write_reg(unsigned char *offset_addr1,
   }
 }
 
-void offset_and_write_addr(unsigned char *offset_addr1,
-                           unsigned char *offset_addr2, int offset1,
-                           int offset2, bool deref1, bool deref2,
-                           Variable *ptr) {
+static void offset_and_write_addr(unsigned char *offset_addr1,
+                                  unsigned char *offset_addr2, int offset1,
+                                  int offset2, bool deref1, bool deref2,
+                                  Variable *ptr) {
   if (deref2) {
     offset_addr2 = offset_addr2 + offset2;
   } else {

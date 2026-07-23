@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-inline void op(int a, int b) {
+static inline int op(int a, int b) {
   // simulating alu subtraction here cuz im too lazy to recreate the fking
   // alu right now
   int res = a - b;
@@ -24,10 +24,10 @@ inline void op(int a, int b) {
   }
 }
 
-void offset_and_write_reg(unsigned char *offset_addr1,
-                          unsigned char *offset_addr2, int offset1, int offset2,
-                          bool deref1, bool deref2, Variable *ptr,
-                          Register *dest_reg) {
+static void offset_and_write_reg(unsigned char *offset_addr1,
+                                 unsigned char *offset_addr2, int offset1,
+                                 int offset2, bool deref1, bool deref2,
+                                 Variable *ptr, Register *dest_reg) {
 
   if (ptr->is_immediate == true) {
     op(*(int *)dest_reg->value, immediate_val);
@@ -49,10 +49,10 @@ void offset_and_write_reg(unsigned char *offset_addr1,
     op(*(int *)offset_addr2, *(int *)offset_addr1);
   }
 }
-void offset_and_write_addr(unsigned char *offset_addr1,
-                           unsigned char *offset_addr2, int offset1,
-                           int offset2, bool deref1, bool deref2,
-                           Variable *ptr) {
+static void offset_and_write_addr(unsigned char *offset_addr1,
+                                  unsigned char *offset_addr2, int offset1,
+                                  int offset2, bool deref1, bool deref2,
+                                  Variable *ptr) {
 
   if (deref2) {
     offset_addr2 = offset_addr2 + offset2;
@@ -62,8 +62,8 @@ void offset_and_write_addr(unsigned char *offset_addr1,
 
   op(*(int *)offset_addr2, *(int *)offset_addr1);
 }
-void offset_and_write_reg_from_reg(Register *dest_reg, Register *src_reg,
-                                   int offset2, bool deref2) {
+static void offset_and_write_reg_from_reg(Register *dest_reg, Register *src_reg,
+                                          int offset2, bool deref2) {
   if (deref2) { // has dest been dereferenced
     int calc = *(int *)(memory.data + *(int *)dest_reg->value + offset2);
     op(calc, *src_reg->value);

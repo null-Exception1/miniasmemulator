@@ -7,12 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-inline int op(int a, int b) { return a ^ b; }
+static inline int op(int a, int b) { return a ^ b; }
 
-void offset_and_write_reg(unsigned char *offset_addr1,
-                          unsigned char *offset_addr2, int offset1, int offset2,
-                          bool deref1, bool deref2, Variable *ptr,
-                          Register *dest_reg) {
+static void offset_and_write_reg(unsigned char *offset_addr1,
+                                 unsigned char *offset_addr2, int offset1,
+                                 int offset2, bool deref1, bool deref2,
+                                 Variable *ptr, Register *dest_reg) {
 
   if (ptr->is_immediate == true) {
     int res = op(*(int *)dest_reg->value, immediate_val);
@@ -37,10 +37,10 @@ void offset_and_write_reg(unsigned char *offset_addr1,
     memcpy(offset_addr2, &res, ptr->size);
   }
 }
-void offset_and_write_addr(unsigned char *offset_addr1,
-                           unsigned char *offset_addr2, int offset1,
-                           int offset2, bool deref1, bool deref2,
-                           Variable *ptr) {
+static void offset_and_write_addr(unsigned char *offset_addr1,
+                                  unsigned char *offset_addr2, int offset1,
+                                  int offset2, bool deref1, bool deref2,
+                                  Variable *ptr) {
 
   if (deref2) {
     offset_addr2 = offset_addr2 + offset2;
@@ -51,8 +51,8 @@ void offset_and_write_addr(unsigned char *offset_addr1,
   int res = op(*(int *)offset_addr1, *(int *)offset_addr2);
   memcpy(offset_addr2, &res, ptr->size);
 }
-void offset_and_write_reg_from_reg(Register *dest_reg, Register *src_reg,
-                                   int offset2, bool deref2) {
+static void offset_and_write_reg_from_reg(Register *dest_reg, Register *src_reg,
+                                          int offset2, bool deref2) {
   if (deref2) { // has dest been dereferenced
     int calc = *(int *)(memory.data + *(int *)dest_reg->value + offset2);
     int res = op(calc, *src_reg->value);

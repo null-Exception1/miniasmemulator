@@ -11,4 +11,9 @@ void and_(char *dest_addr, char *src_addr);
 void not_(char *dest_addr);
 void or_(char *dest_addr, char *src_addr);
 void xor_(char *dest_addr, char *src_addr);
+
+// stack
+void pop_(char *data);
+void push_(char *data);
+
 #endif
