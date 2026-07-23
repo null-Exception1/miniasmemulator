@@ -23,6 +23,8 @@ add_library(microops
   libs/microops/src/logic/not.c
   libs/microops/src/memory/mov.c
   libs/microops/src/flow/cmp.c
+  libs/microops/src/stack/push.c
+  libs/microops/src/stack/pop.c
 )
 add_library(compiler 
   libs/compiler/src/add_var.c
