@@ -1,6 +1,6 @@
 # mini x86 emulator in c
 
-more details on my blog (will release soon)
+**more details on my blog (will release soon)**
 
 a lightweight, memory-sandboxed, turing-complete 32-bit CPU emulator built entirely from scratch in pure C.
 
