@@ -59,16 +59,6 @@ int main() {
   int initial_eax = 0;
   memcpy(eax.value, &initial_eax, 4);
 
-  int const_1 = 1;
-  add_var("1", &memory, 4, (unsigned char *)&const_1, &var_ptr, vartoaddr, INT);
-
-  int const_10 = 10;
-  add_var("10", &memory, 4, (unsigned char *)&const_10, &var_ptr, vartoaddr,
-          INT);
-
-  int const_0 = 0;
-  add_var("0", &memory, 4, (unsigned char *)&const_0, &var_ptr, vartoaddr, INT);
-
   int const_addr = (int)(memory.code_ptr - memory.data);
   printf("%d", const_addr);
   add_var("my_count", &memory, sizeof(Instruction),
@@ -81,7 +71,7 @@ int main() {
   add_ins("hlt", "", "");
 
   printf("\n=======================================================\n");
-  printf("   🚀 EMULATOR INITIALISED: BOOTING CONTROL UNIT 🚀   \n");
+  printf("   EMULATOR INITIALISED: BOOTING CONTROL UNIT            \n");
   printf("=======================================================\n");
   printf("Starting Counter (ECX): %d\n", *(int *)ecx.value);
   printf("Starting Value   (EAX): %d\n", *(int *)eax.value);
@@ -114,7 +104,7 @@ int main() {
 
     if (strcmp("hlt", ptr->op) == 0) {
       printf("=======================================================\n");
-      printf("   🛑 CPU HALTED GRACEFULLY: EXECUTION TERMINATED 🛑   \n");
+      printf("   CPU HALTED GRACEFULLY: EXECUTION TERMINATED         \n");
       printf("=======================================================\n");
       printf("Final Register Verification Summary:\n");
       printf("  EAX (Accumulator Total): %d (Expected: 30)\n",
